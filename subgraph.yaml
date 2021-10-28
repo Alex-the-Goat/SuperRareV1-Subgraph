@@ -14,15 +14,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - WhitelistCreator
-        - Bid
-        - AcceptBid
-        - CancelBid
-        - Sold
-        - SalePriceSet
-        - OwnershipTransferred
-        - Transfer
-        - Approval
+        - Token
       abis:
         - name: Contract
           file: ./abis/Contract.json

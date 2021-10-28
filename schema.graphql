@@ -3,8 +3,8 @@
 type Token @entity {
   id: ID!
   uri: String!
-  owner: Bytes! # address
-  creator: Bytes! # address
-  blockTime: BigInt # address
-  price: BigInt! # address
+  owner: Bytes! 
+  creator: Bytes! 
+  blockTime: BigInt 
+  price: BigInt! 
 }
