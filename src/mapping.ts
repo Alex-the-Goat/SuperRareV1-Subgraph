@@ -17,7 +17,7 @@ export function handleSalePriceSet(event: SalePriceSet): void {
   entity.uri = contract.tokenURI(event.params._tokenId);
   entity.owner = contract.ownerOf(event.params._tokenId);
   entity.creator = contract.creatorOfToken(event.params._tokenId);
-  entity.blockTime = event.block.timestamp;
+  //entity.blockTime = event.block.timestamp;
   entity.price = event.params._price;
  
   entity.save()
