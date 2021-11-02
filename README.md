@@ -24,7 +24,7 @@ To Run Code Generation - `npm run codgegen`
 
 1. Please setup a new subgraph before attempting to deploy - https://thegraph.com/hosted-service/dashboard
 
-2. Skip to the last instruction called Deploy in the setup steps - run these at the 'To Deploy' step below on the first time deploying.
+2. Skip to the last instruction called Deploy in the setup step.
 
 3. Auth yourself to deploy Subgraph - ``graph auth --product hosted-service <ACCESS_TOKEN>`` 
 
