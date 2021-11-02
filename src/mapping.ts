@@ -60,6 +60,7 @@ export function handleBid(event: BidEvent): void {
     bid.resolved = false;
     item.onSale = true;
     bid.save();
+    item.salePrice = bid.amount;
     item.bids.push(bid.id);
     item.save();
     // Update current bidder
@@ -84,7 +85,7 @@ export function handleAcceptBid(event: AcceptBidEvent): void {
       bid.isAccepted = true;
   
       bid.save();
-
+      item.lastSoldPrice = bid.amount;
       // Update current bidder
       item.currentBid = bid.id;
         
@@ -136,6 +137,7 @@ export function handleSold(event: SoldEvent): void {
 
     sale.save();
     item.sales.push(sale.id);
+    item.lastSoldPrice = sale.amount;
     item.save();
     // Transfer item to buyer
     item.owner = buyer.id;
