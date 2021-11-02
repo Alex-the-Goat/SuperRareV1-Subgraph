@@ -26,9 +26,13 @@ To Run Code Generation - `npm run codgegen`
 
 2. Skip to the last instruction called Deploy in the setup steps - run these at the 'To Deploy' step below on the first time deploying.
 
-To Deploy - `npm run deploy` or first time deploy commands from points above.
+3. Auth yourself to deploy Subgraph - ``graph auth --product hosted-service <ACCESS_TOKEN>`` 
+
+4. Run Deploy - `graph deploy --node https://api.thegraph.com/deploy/ <GITHUB_ACCOUNT_NAME>/<SUBGRAPH_NAME>` e.g. *ptomelysoter/superrarev1*
+
 
 Please make sure your subgraph is authed and setup correctly in the package.json - currently it will deploy to *ptomelysoter/superrarev1*. This should be changed
+
 
 
 
