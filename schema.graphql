@@ -70,6 +70,8 @@ type BidLog @entity {
   bidder: Account!
   item: Artwork!
   timestamp: BigInt!
+  resolved: Boolean!
+  isAccepted: Boolean #Is Cancelled or Accepted
 }
 
 type SaleLog @entity {

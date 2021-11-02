@@ -57,7 +57,7 @@ export function handleBid(event: BidEvent): void {
     bid.bidder = bidder.id;
     bid.item = item.id;
     bid.timestamp = event.block.timestamp;
-
+    bid.resolved = false;
     bid.save();
     item.bids.push(bid.id);
     item.save();
@@ -66,6 +66,47 @@ export function handleBid(event: BidEvent): void {
 
     item.save();
   }
+}
+
+export function handleAcceptBid(event: AcceptBidEvent): void {
+    let tokenId = event.params._tokenId.toString();
+    let item = Artwork.load("V1-" + tokenId);
+  
+    if (item != null) {
+      let bidder = getOrCreateAccount(event.params._bidder);
+  
+      // Persist bid log
+      let bid = BidLog.load(
+        tokenId + "-" + bidder.id + "-" + event.block.timestamp.toString()
+      );
+      bid.resolved = true;
+      bid.isAccepted = true;
+  
+      bid.save();
+
+      // Update current bidder
+      item.currentBid = bid.id;
+        
+      item.save();
+    }
+}
+
+export function handleCancelBid(event: CancelBidEvent): void {
+    let tokenId = event.params._tokenId.toString();
+    let item = Artwork.load("V1-" + tokenId);
+  
+    if (item != null) {
+      let bidder = getOrCreateAccount(event.params._bidder);
+  
+      // Persist bid log
+      let bid = BidLog.load(
+        tokenId + "-" + bidder.id + "-" + event.block.timestamp.toString()
+      );
+      bid.resolved = true;
+      bid.isAccepted = false;
+  
+      bid.save();
+    }
 }
 
 export function handleSold(event: SoldEvent): void {
