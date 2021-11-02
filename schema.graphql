@@ -53,6 +53,8 @@ type Artwork @entity {
   bids: [BidLog!] @derivedFrom(field: "item")
   currentBid: BidLog
   salePrice: BigInt
+  lastSoldPrice: BigInt
+  onSale: Boolean!
   sales: [SaleLog!] @derivedFrom(field: "item")
   created: BigInt!
   modified: BigInt

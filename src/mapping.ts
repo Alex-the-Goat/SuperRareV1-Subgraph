@@ -138,18 +138,18 @@ export function handleSold(event: SoldEvent): void {
     item.save();
     // Transfer item to buyer
     item.owner = buyer.id;
-    item.salePrice = integer.ZERO;
-
+    item.lastSoldPrice = event.params._amount;
+    item.onSale = false;
     item.save();
   }
 }
 
 export function handleSalePriceSet(event: SalePriceSetEvent): void {
-  let item = Artwork.load(event.params._tokenId.toString());
+  let item = Artwork.load("V1-" + event.params._tokenId.toString());
 
   if (item != null) {
     item.salePrice = event.params._price;
-
+    item.onSale = true;
     item.save();
   }
 }
@@ -168,7 +168,7 @@ export function handleTransfer(event: TransferEvent): void {
     item.descriptorUri = Contract.bind(event.address).tokenURI(
       event.params._tokenId
     );
-
+    item.onSale = false;
     item.created = event.block.timestamp;
 
     readArtworkMetadata(item as Artwork).save();
