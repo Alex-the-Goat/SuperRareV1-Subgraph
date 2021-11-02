@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This subgraph was commissioned to track SuperRare v1 Artworks (https://etherscan.io/address/0x41a322b28d0ff354040e2cbc676f0320d8c8850d#code) and their respective Bids, Sales and Transfers. Specifically the Lost Robbies (why startBlock has been increased past block of contract deployment)
+This subgraph was commissioned to track SuperRare v1 Artworks (https://etherscan.io/address/0x41a322b28d0ff354040e2cbc676f0320d8c8850d#code) and their respective Bids, Sales and Transfers. Specifically the Lost Robbie. (This is why startBlock has been increased past block of contract deployment - `5364089` to `5977235` - set this back to track all artworks)
 
 The entities are as such - 
 
