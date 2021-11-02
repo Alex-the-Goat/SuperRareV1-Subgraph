@@ -1,6 +1,8 @@
 {
   "name": "superrarev1",
-  "license": "UNLICENSED",
+  "author": "https://github.com/NeoSophists",
+  "repository": {"url": "https://github.com/NeoSophists/SuperRareV1-Subgraph"},
+  "license": "MIT LICENSE", 
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
