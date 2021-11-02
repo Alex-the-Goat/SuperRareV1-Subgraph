@@ -194,47 +194,54 @@ export function handleTransfer(event: TransferEvent): void {
 
 function readArtworkMetadata(item: Artwork): Artwork {
   let hash = getIpfsHash(item.descriptorUri);
-  log.info("FIRST HASH", [hash, item.descriptorUri]);
+  
   if (hash != null) {
     let raw = ipfs.cat(hash);
 
     item.descriptorHash = hash;
-    log.info("HASH", [hash]);
-    log.info("RAW", [hash]);
+    
     if (raw != null) {
-      let value = json.fromBytes(raw as Bytes);
-
-      if (value.kind == JSONValueKind.OBJECT) {
-        let data = value.toObject();
-
-        if (data.isSet("name")) {
-          item.name = data.get("name").toString();
-        }
-
-        if (data.isSet("description")) {
-          item.description = data.get("description").toString();
-        }
-
-        if (data.isSet("yearCreated")) {
-          item.yearCreated = data.get("yearCreated").toString();
-        }
-
-        if (data.isSet("createdBy")) {
-          item.createdBy = data.get("createdBy").toString();
-        }
-
-        if (data.isSet("image")) {
-          item.imageUri = data.get("image").toString();
-          item.imageHash = getIpfsHash(item.imageUri);
-        }
-
-        if (data.isSet("tags")) {
-          item.tags = data
-            .get("tags")
-            .toArray()
-            .map<string>((t) => t.toString());
-        }
+        
+      let result = json.try_fromBytes(raw as Bytes);
+      if (result.isOk) { 
+        let value = result.value
+        if (value.kind == JSONValueKind.OBJECT) {
+            let data = value.toObject();
+    
+            if (data.isSet("name")) {
+              item.name = data.get("name").toString();
+            }
+    
+            if (data.isSet("description")) {
+              item.description = data.get("description").toString();
+            }
+    
+            if (data.isSet("yearCreated")) {
+              item.yearCreated = data.get("yearCreated").toString();
+            }
+    
+            if (data.isSet("createdBy")) {
+              item.createdBy = data.get("createdBy").toString();
+            }
+    
+            if (data.isSet("image")) {
+              item.imageUri = data.get("image").toString();
+              item.imageHash = getIpfsHash(item.imageUri);
+            }
+    
+            if (data.isSet("tags")) {
+              item.tags = data
+                .get("tags")
+                .toArray()
+                .map<string>((t) => t.toString());
+            }
+          }   
+      } else {
+        // Handle the error
+       let error = result.error
+       log.error("ReadMetaData Error - ", [error.toString()]);
       }
+      
     }
   }
 
