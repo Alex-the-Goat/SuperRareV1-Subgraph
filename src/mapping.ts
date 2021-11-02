@@ -68,14 +68,6 @@ export function handleBid(event: BidEvent): void {
   }
 }
 
-export function handleAcceptBid(event: AcceptBidEvent): void {
-  // TODO
-}
-
-export function handleCancelBid(event: CancelBidEvent): void {
-  // TODO
-}
-
 export function handleSold(event: SoldEvent): void {
   let tokenId = event.params._tokenId.toString();
   let item = Artwork.load("V1-" + tokenId);
