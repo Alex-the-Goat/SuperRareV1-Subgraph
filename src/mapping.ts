@@ -51,7 +51,7 @@ export function handleBid(event: BidEvent): void {
 
     // Persist bid log
     let bid = new BidLog(
-      tokenId + "-" + bidder.id + "-" + event.block.timestamp.toString()
+      tokenId + "-" + bidder.id
     );
     bid.amount = event.params._amount;
     bid.bidder = bidder.id;
@@ -77,7 +77,7 @@ export function handleAcceptBid(event: AcceptBidEvent): void {
   
       // Persist bid log
       let bid = BidLog.load(
-        tokenId + "-" + bidder.id + "-" + event.block.timestamp.toString()
+        tokenId + "-" + bidder.id
       );
       bid.resolved = true;
       bid.isAccepted = true;
@@ -100,7 +100,7 @@ export function handleCancelBid(event: CancelBidEvent): void {
   
       // Persist bid log
       let bid = BidLog.load(
-        tokenId + "-" + bidder.id + "-" + event.block.timestamp.toString()
+        tokenId + "-" + bidder.id
       );
       bid.resolved = true;
       bid.isAccepted = false;
