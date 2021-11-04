@@ -184,6 +184,8 @@ export function handleTransfer(event: TransferEvent): void {
         // Transfer token
         item.owner = account.id;
         item.modified = event.block.timestamp;
+        item.onSale = false;
+        item.salePrice = null;
       }
 
       item.save();
