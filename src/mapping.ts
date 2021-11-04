@@ -87,7 +87,7 @@ export function handleAcceptBid(event: AcceptBidEvent): void {
       item.lastSoldPrice = bid.amount;
       // Update current bidder
       item.currentBid = bid.id;
-        
+      item.onSale = false;
       item.save();
     }
 }
