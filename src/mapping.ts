@@ -58,7 +58,7 @@ export function handleBid(event: BidEvent): void {
     bid.item = item.id;
     bid.timestamp = event.block.timestamp;
     bid.resolved = false;
-    item.onSale = true;
+    //item.onSale = true;
     bid.save();
     item.salePrice = bid.amount;
     item.bids.push(bid.id);
