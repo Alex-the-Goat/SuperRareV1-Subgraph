@@ -38,6 +38,7 @@ type Artwork @entity {
   creator: Account!
   owner: Account!
   version: ArtworkMetadata!
+  found: Boolean!
 
   # Metadata
   descriptorUri: String!

@@ -135,6 +135,7 @@ export function handleSold(event: SoldEvent): void {
     sale.timestamp = event.block.timestamp;
 
     sale.save();
+    item.found = true;
     item.sales.push(sale.id);
     item.lastSoldPrice = sale.amount;
     item.save();
@@ -151,6 +152,7 @@ export function handleSalePriceSet(event: SalePriceSetEvent): void {
   if (item != null) {
     item.salePrice = event.params._price;
     item.onSale = true;
+    item.found = true;
     item.save();
   }
 }
@@ -166,6 +168,7 @@ export function handleTransfer(event: TransferEvent): void {
     item.creator = account.id;
     item.owner = item.creator;
     item.tokenId = event.params._tokenId;
+    item.found = false;
     item.descriptorUri = Contract.bind(event.address).tokenURI(
       event.params._tokenId
     );
@@ -186,6 +189,7 @@ export function handleTransfer(event: TransferEvent): void {
         item.modified = event.block.timestamp;
         item.onSale = false;
         item.salePrice = null;
+        item.found = true;
       }
 
       item.save();
